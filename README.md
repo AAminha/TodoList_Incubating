@@ -13,6 +13,8 @@
 ## 참고 및 공부 링크
 [타입스크립트로 TODO LIST 만들어보기](https://withseungryu.tistory.com/42)  
 [Typescript로 Todo list 만들기](https://velog.io/@sugyinbrs/Typescript-%EB%A1%9C-Todo-list-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+[Typescript 관련 자료(영어)]( https://react-typescript-cheatsheet.netlify.app/)
+[Typescript로 TodoList 만들기 - 컴포넌트 만들기](https://intrepidgeeks.com/tutorial/create-your-own-todolist-using-and-typescript-part-2-create-components-and-storybook)
 
 ## 공부 내용
 * Typescript로 react 프로젝트 만드는 방법
@@ -36,3 +38,31 @@ const <함수명> : React.FC = () => { // FC는 Functional Component
 typescript에서 type들만 모여 있는 파일을 만들 수 있다. (types.ts / types.d.ts)
 
 * [파일명].d.ts는 파일명에 decoration을 해준 것으로 따로 import할 필요가 없다.
+
+* 함수형 컴포넌트 (functional component)
+리액트에서 컴포넌트 정의 시 보통 ES6의 class 문법 사용
+(컴포넌트에서 라이프사이클 사용, state 사용 경우 특히!!)
+
+위의 경우가 아니고, 단순히 props만 전달해주면 뷰를 렌더링만 하는 역할이라면 함수형 컴포넌트 형식으로 컴포넌트 정의 가능.
+```
+import React from 'react';
+
+function Hello(props) {
+  return (<div>Hello {porps.name}</div>);
+}
+/*
+const Hello = (props) => {
+  return (<div>Hello {props.name}</div>);
+}
+*/
+
+export default Hello;
+```
+```
+/* typescript에서 functional component 생성하기 */
+interface AppProps {
+  name: string;
+}
+
+const App = (props: AppProps) => { };
+```

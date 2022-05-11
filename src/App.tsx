@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { TodoListItem } from './TodoListItem';
+import DateList from './DateList';
+import TodoList from './TodoList';
 
-const todos: Array<Todo> = [ // todos의 타입을 정해야 한다. => types.ts 파일생성
-  {text: "밥 먹기", complete: true},
-  {text: "옷 입기", complete: false}
-];
 
-const App: React.FC = () => {
+
+
+/* const App: React.FC = () => {
   return (
     <ul>
       <React.Fragment>
@@ -16,12 +15,15 @@ const App: React.FC = () => {
       </React.Fragment>
     </ul>
   )
-}
-
-/* function App() {
-  return (
-    <div>Hello!!!!</div>
-  );
 } */
+
+const App = () => {
+  return (
+    <div>
+      <TodoList/>
+      <DateList/>
+    </div>
+  )
+}
 
 export default App;
