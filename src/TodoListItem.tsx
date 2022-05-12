@@ -1,28 +1,14 @@
+/**@jsxImportSource @emotion/react */
 import React from 'react';
-
-/* interface TodoListItemProps {
-  todo: {
-    text: string,
-    complete: boolean;
-  }
-} */
+import { css } from '@emotion/react';
 
 interface TodoListItemProps {
   todo: Todo;
 }
 
-/* export const TodoListItem: React.FC<TodoListItemProps> = ({todo}) => {
-  return <li>
-    <label className={todo.complete ? "complete" : undefined}>
-      <input type="checkbox" checked={todo.complete}/>
-      {todo.text}
-    </label>
-  </li>
-} */
-
 export const TodoListItem = ({todo}: TodoListItemProps) => {
   return(
-    <div>
+    <div css={css`background: gray`}>
       <label className={todo.complete ? "complete" : undefined}>
         <input id="item" type="checkbox" checked={todo.complete}/>
         {todo.text}
