@@ -6,3 +6,19 @@ type Todo = {
   date: string;
   complete: boolean;
 };
+
+type Week = {
+  year: number;
+  month: number;
+  date: number;
+  day: string;
+}
+
+type Initial = {
+  day: number;
+  todo: Todo[];
+}
+
+type Day = {
+  day: number;
+}

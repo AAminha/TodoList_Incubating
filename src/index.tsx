@@ -1,26 +1,18 @@
-import React from 'react';
-//import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import App from "./App";
+import rootReducer from "./Redux";
 
-/* const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const store = createStore(rootReducer);
+
+const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>
-);
+  </Provider>
+)
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
- */
-
-ReactDOM.render(
-  <App />,
-document.getElementById('root')
-);
+// ts는 dom을 몰라서 분명히 존재하는 태그도 null일 가능성을 염두에 두고 있다.
+// 이럴때는 어쩔 수 없이 non null assertion을 해야 합니다.
