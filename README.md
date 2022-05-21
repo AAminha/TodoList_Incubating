@@ -1,4 +1,8 @@
 # Typescript로 만들어보는 Todo List
+## 구현 완료
+[구현된 사이트](https://aaminha.github.io/TodoList_Incubating/)
+* Redux 적용 제외...
+
 ## 구현해야 할 부분
 1. 텍스트(Todo)를 클릭하면 빨간 줄이 그어짐
 2. 날짜에 맞는 TodoList 생성
