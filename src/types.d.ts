@@ -3,8 +3,14 @@
 type Todo = {
   id: number;
   text: string;
-  date: string;
+  date: number;
   complete: boolean;
+};
+
+type TodoItem = {
+  todo: Array<Todo>;
+  day: number;
+  dateList: Array<number>;
 };
 
 type Week = {

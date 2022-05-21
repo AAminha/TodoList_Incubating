@@ -110,7 +110,7 @@ function addTodo(data) {
 * [Redux] Reducer
 변화를 일으키는 함수.
 액션을 만들어서 발생시키면 리듀서가 현재 상태와 전달받은 액션 객체를 파라미터로 받아옴.
-두 값을 참고하여 새로운 상태를 만들어 반호나해 줌.
+두 값을 참고하여 새로운 상태를 만들어 반환해 줌.
 ```
 const initialState {
   counter: 1

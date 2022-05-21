@@ -1,18 +1,25 @@
 /**@jsxImportSource @emotion/react */
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
-import { useDispatch } from 'react-redux';
-import { select } from './Redux/actions';
 
-const DateList = () => {
+interface DateListItemProps {
+  day: number;
+  dateList: Array<number>;
+  setDay: (day: number) => void;
+  setTodo: (todo: Array<Todo>) => void;
+}
+
+const DateList = ({day, dateList, setDay, setTodo}: DateListItemProps) => {
   const [weekList, setWeekList] = useState<Week[]>([]);
-  const [day, onDay] = useState(3);
+  //const [day, onDay] = useState(3);
   
-  const dispatch = useDispatch(); // store에 설정된 action에 대한 dispatch 연결
+  /* const dispatch = useDispatch(); // store에 설정된 action에 대한 dispatch 연결
   const selectDay = React.useCallback(
-    (day: number) => dispatch(select({ day: day })),
-    [dispatch]
-  );
+    (day: number, dayKey: number) => dispatch(
+      select({ day: day, dayKey: dayKey })
+    ), [dispatch]
+  ); */
+  
 
   useEffect(() => {
     let list = [];
@@ -33,11 +40,14 @@ const DateList = () => {
     setWeekList(list);
   }, []);
 
-  const onClick = (e: React.FormEvent, i: number) => {
-    e.preventDefault();
+  const onClick = (e: React.FormEvent, v: Week, i: number) => {
+    //e.preventDefault();
+    //const key = (v.year-2000) * 10000 + (v.month+1) * 100 + v.date * 1;
     console.log(i);
-    selectDay(i);
-    onDay(i);
+    //console.log(key);
+    //selectDay(i, key);
+    setDay(i);
+    //setTodo(JSON.parse(localStorage.getItem(dateList[i].toString()) || '{}'));
   }
 
   return (
@@ -48,7 +58,7 @@ const DateList = () => {
       {weekList.map((v, i) =>
         <li
           key={v.date}
-          onClick={(e) => onClick(e, i)}
+          onClick={(e) => onClick(e, v, i)}
           css={day === i ? selected : dayList}
         >
           {v.year}년 {v.month}월 {v.date}일 {v.day}요일
