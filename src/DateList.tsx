@@ -2,24 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 
-interface DateListItemProps {
-  day: number;
-  dateList: Array<number>;
-  setDay: (day: number) => void;
-  setTodo: (todo: Array<Todo>) => void;
-}
-
-const DateList = ({day, dateList, setDay, setTodo}: DateListItemProps) => {
+const DateList = ({day, setDay}: DateListItemProps) => {
   const [weekList, setWeekList] = useState<Week[]>([]);
-  //const [day, onDay] = useState(3);
-  
-  /* const dispatch = useDispatch(); // store에 설정된 action에 대한 dispatch 연결
-  const selectDay = React.useCallback(
-    (day: number, dayKey: number) => dispatch(
-      select({ day: day, dayKey: dayKey })
-    ), [dispatch]
-  ); */
-  
 
   useEffect(() => {
     let list = [];
@@ -41,20 +25,11 @@ const DateList = ({day, dateList, setDay, setTodo}: DateListItemProps) => {
   }, []);
 
   const onClick = (e: React.FormEvent, v: Week, i: number) => {
-    //e.preventDefault();
-    //const key = (v.year-2000) * 10000 + (v.month+1) * 100 + v.date * 1;
-    console.log(i);
-    //console.log(key);
-    //selectDay(i, key);
     setDay(i);
-    //setTodo(JSON.parse(localStorage.getItem(dateList[i].toString()) || '{}'));
   }
 
   return (
-    <ul css={css`
-      background: yellow;
-      list-style:none
-    `}>
+    <ul css={dateList}>
       {weekList.map((v, i) =>
         <li
           key={v.date}
@@ -70,19 +45,34 @@ const DateList = ({day, dateList, setDay, setTodo}: DateListItemProps) => {
 
 export default DateList;
 
+const dateList = css`
+  height: 290px;
+  width: 250px;
+  padding: 10px;
+  padding-bottom: 0px;
+  list-style:none;
+`
+
 const dayList = css`
-  background: Teal;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  color: Dimgray;
   &:hover {
     cursor: pointer;
-    color: white;
+    color: Crimson;
   }
 `
 
 const selected = css`
-  background: Teal;
-  color: Blue;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+  color: Red;
   &:hover {
     cursor: pointer;
-    color: white;
+    color: Crimson;
   }
 `

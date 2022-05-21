@@ -1,45 +1,23 @@
 /**@jsxImportSource @emotion/react */
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/react';
 import { TodoListItem } from './TodoListItem';
-import { useSelector } from 'react-redux';
-//import { RootState } from './Redux';
-import { useDispatch } from 'react-redux';
-import DateList from './DateList';
 
-interface TodoListItemProps {
-  dayKey: number;
-  day: number;
-  todo: Array<Todo>;
-  setTodo: (todo: Array<Todo>) => void;
-}
-
-const TodoList = ({dayKey, day, todo, setTodo}: TodoListItemProps) => {
-  //const todos = useSelector((state : RootState) => state.todo.todo);
-  //const day = useSelector((state: RootState) => state.todo.day);
-  //const key = useSelector((state: RootState) => state.todo.dateList[day]);
-  
-  //const dispatch = useDispatch();
-  /* const updateTodo = React.useCallback(
-    (day: number) => dispatch (
-      update({day: day})), [dispatch]
-  ) */
+const TodoList = ({dayKey, day, todo, setTodo}: TodoListProps) => {
   
   let arr = todo;
 
+  const today = new Date();
   const week = ['일', '월', '화', '수', '목', '금', '토'];
+  const todayStr = `${today.getFullYear()}년 ${today.getMonth()+1}월 ${today.getDate()}일 ${week[today.getDay()]}요일`
 
-  //const [test, setTest] = useState<Todo[]>(todo);
-  // 추가하기를 클릭했는지 안했는지를 확인하기 위함
   const [onAdd, setOnAdd] = useState<boolean>(false);
 
   const onAddClick = () => {
     setOnAdd(!onAdd);
   }
 
-  const onBtnClick = () => {
-    console.log("버튼 클릭")
-    
+  const onBtnClick = () => {    
     const today = new Date();
     let date = new Date(today.setDate(today.getDate() + 3 - day));
 
@@ -50,13 +28,8 @@ const TodoList = ({dayKey, day, todo, setTodo}: TodoListItemProps) => {
       complete: false
     }
 
-    console.log("==============================");
-    console.log("추가할 item의 id = " + item.id);
-    console.log("==============================");
-
     arr.push(item);
     localStorage.setItem(dayKey.toString(), JSON.stringify(arr));
-    //updateTodo(day);
     setTodo(JSON.parse(localStorage.getItem(dayKey.toString()) || '{}'))
     setOnAdd(!onAdd);
     setInput('');
@@ -68,19 +41,23 @@ const TodoList = ({dayKey, day, todo, setTodo}: TodoListItemProps) => {
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
-      console.log("키 클릭")
       onBtnClick();
     }
   }
 
+  useEffect(() => {
+    setOnAdd(false);
+  }, [day])
+
   const [input, setInput] = useState<string>('');
 
   return(
-    <div>
-      <div css={css`background: aqua`}>TodoList 테스트</div>
+    <div css={todoList_container}>
+      <h3 css={css`color: Darkblue`}>{todayStr}</h3>
       {todo.map((item) => 
         <TodoListItem
           key={item.id}
+          dayKey={dayKey}
           todo={item}
           todos={todo}
           setTodo={setTodo}
@@ -89,17 +66,61 @@ const TodoList = ({dayKey, day, todo, setTodo}: TodoListItemProps) => {
       {onAdd ?
         <label>
           <input
+            css={inputBox}
+            type="text"
             placeholder ='내용을 입력하세요'
             value = {input}
             onChange = {onChange}
             onKeyDown = {onKeyDown}
           />
-          <button onClick={onBtnClick}>추가</button>
+          <button css={inputBtn} onClick={onBtnClick}>추가</button>
         </label>
-        : <div onClick={onAddClick}>추가하기</div>
+        : <div css={onInputBtn} onClick={onAddClick}>+ 추가하기</div>
       }
     </div>
   )
 }
+
+const todoList_container = css`
+  background: Powderblue;
+  box-shadow: 3px 3px 3px 3px gray;
+  padding: 20px 10px 20px 15px;
+  width: 310px;
+  height: 300px;
+  border-radius: 25px;
+`
+
+const inputBox = css`
+  width: 230px;
+  height: 19px;
+  padding: 3px;
+  padding-left: 10px;
+  margin-right: 8px;
+  border:0 solid black;
+  border-radius: 10px;
+`
+
+const inputBtn = css`
+  margin-top: 5px;
+  width: 50px;
+  height: 27px;
+  border: 0px;
+  border-radius: 10px;
+  font-weight: bold;
+  background: White;
+`
+
+const onInputBtn = css `
+  width: 90px;
+  margin: 5px;
+  margin-left: 15px;
+  text-align: left;
+  font-weight: bold;
+  opacity: 0.5;
+  &:hover {
+    cursor: pointer;
+    opacity: 1.0;
+  }
+`
 
 export default TodoList;

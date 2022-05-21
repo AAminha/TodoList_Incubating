@@ -1,19 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { useSelector } from "react-redux";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
 import App from "./App";
-//import rootReducer, { RootState } from "./Redux";
-//import { initialState } from "./Redux/reducer";
 
-//export const store = createStore(rootReducer);
-
-/* const storageUpdate = () => {
-  localStorage.setItem(initialState.dateList.toString(), JSON.stringify(initialState.todo));
-}
-  
-store.subscribe(storageUpdate); */
 
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(<App />)

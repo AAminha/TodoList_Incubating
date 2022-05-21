@@ -7,12 +7,6 @@ type Todo = {
   complete: boolean;
 };
 
-type TodoItem = {
-  todo: Array<Todo>;
-  day: number;
-  dateList: Array<number>;
-};
-
 type Week = {
   year: number;
   month: number;
@@ -20,11 +14,23 @@ type Week = {
   day: string;
 }
 
-type Initial = {
+type DateListItemProps = {
   day: number;
-  todo: Todo[];
+  dateList: Array<number>;
+  setDay: (day: number) => void;
+  setTodo: (todo: Array<Todo>) => void;
 }
 
-type Day = {
+type TodoListItemProps = {
+  dayKey: number;
+  todo: Todo;
+  todos: Array<Todo>;
+  setTodo: (test: Array<Todo>) => void;
+}
+
+type TodoListProps = {
+  dayKey: number;
   day: number;
+  todo: Array<Todo>;
+  setTodo: (todo: Array<Todo>) => void;
 }
